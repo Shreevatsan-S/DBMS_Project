@@ -77,7 +77,7 @@ async function run() {
 // run().catch(console.dir);
 
 
-app.get('/run', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
       await run();
       res.send('Operation completed successfully');
