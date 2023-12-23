@@ -74,10 +74,11 @@ async function run() {
   }
 }
 
-// run().catch(console.dir);
+run().catch(console.dir);
 
-
+console.log("serverrr")
 app.get('/', async (req, res) => {
+    console.log("requested")
     try {
       await run();
       res.send('Operation completed successfully');
