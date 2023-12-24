@@ -10,7 +10,7 @@ const client = new MongoClient(uri, {});
 
 app.use(cors());
 
-let input=`db.licenses.find({id:101586})`
+let input
 let collections=["crime_scene_reports" , "persons"  , "incomes" , "interviews" , "licenses" , "get_fit_now_check_ins" , "get_fit_now_members" , "facebook_event_checkins"]
 
 let first , second , third , query, errMsg
@@ -90,6 +90,7 @@ run().catch(console.dir);
 
 console.log("serverrr")
 app.get('/', async (req, res) => {
+      input = req.query.input
     console.log("requested")
     try {
       const resp = await run();
