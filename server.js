@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const { MongoClient } = require('mongodb');
-const { Statement } = require('sqlite3');
 const cors = require('cors');
 
 
@@ -31,8 +30,10 @@ function queryProcessor(str){
                 let l=str.length
                 if(str[l-1]==")"){
                     query=str.slice(y+1 , l-1)
+                    // query=query.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ')
+                    query = query.replace(/([{,]\s*)([a-zA-Z_$][\w$]*)(\s*:)/g, '$1"$2"$3');
                     console.log(second , third , query)
-                    query=query.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ')
+
                 }
                 else{
                     console.error("wrong error 4")
@@ -86,12 +87,13 @@ async function run() {
   }
 }
 
-run().catch(console.dir);
+// run().catch(console.dir);
 
-console.log("serverrr")
+// console.log("serverrr")
 app.get('/', async (req, res) => {
-      input = req.query.input
+    input = req.query.input
     console.log("requested")
+    console.log("input is " , input)
     try {
       const resp = await run();
       console.log(resp)
