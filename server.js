@@ -31,7 +31,7 @@ function queryProcessor(str){
                 if(str[l-1]==")"){
                     query=str.slice(y+1 , l-1)
                     // query=query.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2": ')
-                    query = query.replace(/([{,]\s*)([a-zA-Z_$][\w$]*)(\s*:)/g, '$1"$2"$3');
+                    query = query.replace(/(\$?\b\w+\b)(?=\s*:)/g, '"$1"');
                     console.log(second , third , query)
 
                 }
